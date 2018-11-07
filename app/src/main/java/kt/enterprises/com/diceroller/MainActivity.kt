@@ -3,10 +3,13 @@ package kt.enterprises.com.diceroller
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageView
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var   buttonRoll : Button
+    lateinit var buttonRoll: Button
+    lateinit var imageDice: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -14,10 +17,32 @@ class MainActivity : AppCompatActivity() {
 
         cast()
 
+        buttonRoll.setOnClickListener {
+            rollDice()
+        }
 
+
+    }
+
+    private fun rollDice() {
+
+        val randomInt: Int = Random().nextInt(6) + 1
+
+        val drawableResource = when (randomInt) {
+            1 -> R.drawable.dice_1
+            2 -> R.drawable.dice_2
+            3 -> R.drawable.dice_3
+            4 -> R.drawable.dice_4
+            5 -> R.drawable.dice_5
+            else -> R.drawable.dice_6
+
+        }
+
+        imageDice.setImageResource(drawableResource)
     }
 
     private fun cast() {
         buttonRoll = findViewById(R.id.roll_button)
+        imageDice = findViewById(R.id.dice_image)
     }
 }
